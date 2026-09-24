@@ -147,6 +147,17 @@
       "pin_style": "label_hover",
       "target": "img_20260923_141250_00_003",
       "link_icon": "ground"
+    },
+    {
+      "yaw": 3.1366836529081112,
+      "pitch": 1.3924855923243733,
+      "title": "Stop 12",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "img_20260923_140600_00_999",
+      "link_icon": "ground"
     }
   ],
   "hotspots_2": [],
