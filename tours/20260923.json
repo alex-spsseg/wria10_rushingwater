@@ -86,8 +86,61 @@
       "lng": -122.01628345812892
     }
   ],
-  "basemap_type": "esri_tile",
-  "basemap_url": "https://tiles.arcgis.com/tiles/buuvDFFARQiOEbVZ/arcgis/rest/services/Rushingwater_20260923_ortho/MapServer/tile/{z}/{y}/{x}",
+  "basemap_type": "xyz_tile",
+  "basemap_url": "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
+  "overlays": [
+    {
+      "label": "ELJs",
+      "url": "https://services7.arcgis.com/buuvDFFARQiOEbVZ/arcgis/rest/services/RushingwaterAPE_ProjectElements_20260414/FeatureServer/1",
+      "opacity": 1.0,
+      "default_on": true,
+      "type": "feature",
+      "color": "#A020F0"
+    },
+    {
+      "label": "Project Limit",
+      "url": "https://services7.arcgis.com/buuvDFFARQiOEbVZ/arcgis/rest/services/RushingwaterAPE_ProjectElements_20260414/FeatureServer/3",
+      "opacity": 0.8,
+      "default_on": false,
+      "type": "feature",
+      "color": "#B22222"
+    },
+    {
+      "label": "Plan Set (2025)",
+      "url": "https://tiles.arcgis.com/tiles/buuvDFFARQiOEbVZ/arcgis/rest/services/Rushingwater_PermitSet_DRAFT_Dec2025_georeferenced/MapServer/tile/{z}/{y}/{x}",
+      "opacity": 0.8,
+      "default_on": false,
+      "type": "tile"
+    },
+    {
+      "label": "Ortho (9/23/2026)",
+      "url": "https://tiles.arcgis.com/tiles/buuvDFFARQiOEbVZ/arcgis/rest/services/Rushingwater_20260923_ortho/MapServer/tile/{z}/{y}/{x}",
+      "opacity": 1.0,
+      "default_on": true,
+      "type": "tile"
+    },
+    {
+      "label": "Ortho (1/14/2026)",
+      "url": "https://tiles.arcgis.com/tiles/buuvDFFARQiOEbVZ/arcgis/rest/services/Rushingwater_20260114_Ortho_ppk/MapServer/tile/{z}/{y}/{x}",
+      "opacity": 1.0,
+      "default_on": false,
+      "type": "tile"
+    },
+    {
+      "label": "Ortho (8/19/2025)",
+      "url": "https://tiles.arcgis.com/tiles/buuvDFFARQiOEbVZ/arcgis/rest/services/Rushingwater_20250819_Ortho/MapServer/tile/{z}/{y}/{x}",
+      "opacity": 1.0,
+      "default_on": true,
+      "type": "tile"
+    },
+    {
+      "label": "Ortho (1/28/2025)",
+      "url": "https://tiles.arcgis.com/tiles/buuvDFFARQiOEbVZ/arcgis/rest/services/Rushingwater_20250128_Ortho_georeferenced/MapServer/tile/{z}/{y}/{x}",
+      "opacity": 1.0,
+      "default_on": false,
+      "type": "tile"
+    }
+  ],
   "forward_label": "Forward",
   "backward_label": "Back"
 }

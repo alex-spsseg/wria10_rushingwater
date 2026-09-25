@@ -12,8 +12,8 @@
   "autorotate": false,
   "hotspots_1": [
     {
-      "yaw": 3.141592653589793,
-      "pitch": 0,
+      "yaw": 3.1531147778851416,
+      "pitch": -0.5369391009705424,
       "title": "Overview",
       "text": "",
       "link": "",
@@ -30,6 +30,6 @@
   "basemap_url": "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
   "mobile_1": 5000,
   "mobile_2": 0,
-  "heading_offset": null,
+  "heading_offset": 43.645849829286476,
   "capture_type": "aerial"
 }

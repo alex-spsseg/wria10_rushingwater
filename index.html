@@ -194,6 +194,12 @@
     #site-map-zoomto-btn { right: 44px; }
     #site-map-basemap-btn { right: 80px; font-size: 16px; display: none; }
     #site-map-fit-btn:hover, #site-map-basemap-btn:hover, #site-map-zoomto-btn:hover { background: #f4f4f4; }
+    /* Leaflet's own layers control (added for overlays -- see
+    ensureMapInitialized) defaults to the same top-right corner as the
+    fit/zoom/basemap buttons above, sitting directly behind them.
+    Pushing the whole top-right Leaflet control stack down clears
+    that row instead of the two overlapping. */
+    #site-map-panel .leaflet-top.leaflet-right { margin-top: 42px; }
     /* Armed state (waiting for the map click that picks the zoom
     point) gets a highlighted border so it reads as "active tool"
     rather than a plain hover, and the cursor change over the map
@@ -565,7 +571,7 @@
 </head>
 <body>
 
-  <div id="build-timestamp">Built 2026-09-25 11:04:11</div>
+  <div id="build-timestamp">Built 2026-09-25 13:32:30</div>
 
   <div id="status-banner"></div>
 
@@ -1131,6 +1137,7 @@
           pendingMapData = {
             type: 'single', lat: config.lat, lng: config.lng, label: pageTitle,
             basemapType: config.basemap_type || 'osm', basemapUrl: config.basemap_url || '',
+            overlays: config.overlays || [],
           };
           mapToggleBtn.style.display = 'inline-block';
         }
@@ -2075,6 +2082,80 @@
         basemapToggleBtn.title = 'Switch to OpenStreetMap';
       } else {
         osmLayer.addTo(siteMap);
+      }
+      // Overlays sit independently of the base layer above (e.g. a
+      // georeferenced site plan over satellite imagery, or two
+      // different flight dates to compare), so they get Leaflet's own
+      // layers control rather than the single-layer toggle button
+      // above, which only ever swaps between exactly two base layers.
+      // Passing null for the base-layer argument keeps that control
+      // out of this list, so there's no second, conflicting way to
+      // switch basemaps.
+      // Which ones start checked is the GUI's own "On by default"
+      // choice per overlay (see _build_overlay_editor), not something
+      // decided here -- several full-coverage overlays defaulting on
+      // at once (e.g. two orthophoto dates covering the same area)
+      // just show whichever was added last, making the others look
+      // like they "aren't showing up" when they're really just fully
+      // covered, so leaving that call to whoever set the overlay up
+      // avoids that by default while still allowing it deliberately.
+      var overlays = (pendingMapData && pendingMapData.overlays) || [];
+      if (overlays.length) {
+        var overlayLayers = {};
+        overlays.forEach((o, idx) => {
+          if (!o.url) return;
+          var opacity = typeof o.opacity === 'number' ? o.opacity : 1;
+          var layer;
+          // Each overlay gets its own dedicated Leaflet pane with an
+          // explicit, unambiguous z-index, rather than relying on a
+          // tile layer's own zIndex option -- that option has to sit
+          // correctly relative to the base map layer sharing the
+          // same default pane, and evidently that interaction wasn't
+          // reliable. A custom pane per layer sidesteps that
+          // entirely: each one is its own isolated stacking context,
+          // so there's nothing left for it to conflict with. Panes
+          // between 210 and 399 sit above the base map (tilePane,
+          // 200) and below markers/popups (600+), and higher list
+          // position gets a higher number here, same top-of-list-on-
+          // top convention as the Move Up/Move Down help text.
+          var paneName = 'overlay-pane-' + idx;
+          if (!siteMap.getPane(paneName)) {
+            var pane = siteMap.createPane(paneName);
+            pane.style.zIndex = 210 + (overlays.length - idx);
+            pane.style.pointerEvents = 'none'; // re-enabled below only for feature layers (need clicks)
+          }
+          if (o.type === 'feature' && window.L && L.esri && L.esri.featureLayer) {
+            // Real geometry (points/lines/polygons) from a Hosted
+            // Feature Layer, not pixels -- stays sharp at any zoom
+            // and is clickable, unlike a rasterized version of the
+            // same data would be. One flat color per layer (no
+            // per-attribute styling) keeps this a lightweight
+            // reference layer rather than a second copy of AGOL's
+            // own Map Viewer.
+            siteMap.getPane(paneName).style.pointerEvents = 'auto';
+            var color = o.color || '#019fc4';
+            layer = L.esri.featureLayer({
+              url: o.url, pane: paneName,
+              style: function () { return { color: color, weight: 2, fillColor: color, fillOpacity: opacity * 0.35, opacity: opacity }; },
+            });
+            layer.bindPopup(l => {
+              var props = (l.feature && l.feature.properties) || {};
+              var rows = Object.keys(props)
+                  .filter(k => props[k] !== null && props[k] !== '')
+                  .map(k => '<tr><td style="font-weight:600;padding-right:10px;">' + escapeHtml(k) +
+                             '</td><td>' + escapeHtml(String(props[k])) + '</td></tr>')
+                  .join('');
+              return rows ? '<table style="font-size:12px;">' + rows + '</table>' : '(no attributes)';
+            });
+          } else {
+            layer = L.tileLayer(o.url, { maxZoom: 22, opacity: opacity, attribution: 'Imagery: SPSSEG', pane: paneName });
+          }
+          overlayLayers[o.label || 'Overlay'] = layer;
+          if (o.default_on !== false) layer.addTo(siteMap);
+        });
+        if (Object.keys(overlayLayers).length) {
+          L.control.layers(null, overlayLayers, { collapsed: true }).addTo(siteMap);
+        }
       }
       // Resizing the panel (see the CSS `resize: both`) changes
       // #site-map's dimensions, but Leaflet only measures its
@@ -3178,6 +3259,7 @@
             pendingMapData = {
               type: 'tour', sites: sitesWithGps,
               basemapType: manifest.basemap_type || 'osm', basemapUrl: manifest.basemap_url || '',
+              overlays: manifest.overlays || [],
             };
             mapToggleBtn.style.display = 'inline-block';
             openSiteMap();
