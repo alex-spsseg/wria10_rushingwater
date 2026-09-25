@@ -1,8 +1,8 @@
 {
   "mode": "single",
   "format": "raw",
-  "yaw_1": 0.7424570867284962,
-  "pitch_1": 0.32705730945771094,
+  "yaw_1": -0.30571174201810436,
+  "pitch_1": 0.7294554801263153,
   "yaw_2": 0.0,
   "pitch_2": 0.0,
   "lat": 46.900674101450214,
@@ -12,24 +12,16 @@
   "autorotate": false,
   "hotspots_1": [
     {
-      "yaw": 0.7424570867284965,
-      "pitch": 0,
+      "yaw": -2.4067245292144523,
+      "pitch": -0.3857767936313543,
       "title": "Overview",
       "text": "",
       "link": "",
       "category": "link",
       "pin_style": "label_hover",
-      "target": "dji_20260923133954_0001_d"
-    },
-    {
-      "yaw": 3.141592653589793,
-      "pitch": 0,
-      "title": "Overview",
-      "text": "",
-      "link": "",
-      "category": "link",
-      "pin_style": "label_hover",
-      "target": "dji_20260923133954_0001_d"
+      "target": "dji_20260923133954_0001_d",
+      "link_icon": "overview",
+      "images": []
     }
   ],
   "hotspots_2": [],

@@ -86,8 +86,8 @@
       "lng": -122.01628345812892
     }
   ],
-  "basemap_type": "xyz_tile",
-  "basemap_url": "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
+  "basemap_type": "esri_tile",
+  "basemap_url": "https://tiles.arcgis.com/tiles/buuvDFFARQiOEbVZ/arcgis/rest/services/Rushingwater_20260923_ortho/MapServer/tile/{z}/{y}/{x}",
   "forward_label": "Forward",
   "backward_label": "Back"
 }

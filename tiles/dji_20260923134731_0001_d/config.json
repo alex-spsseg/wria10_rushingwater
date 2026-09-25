@@ -12,14 +12,16 @@
   "autorotate": false,
   "hotspots_1": [
     {
-      "yaw": -3.07882899943856,
-      "pitch": -0.3367121869976053,
+      "yaw": 3.1824734216733614,
+      "pitch": -0.2914035993072446,
       "title": "Overview",
       "text": "",
       "link": "",
       "category": "link",
       "pin_style": "label_hover",
-      "target": "dji_20260923133954_0001_d"
+      "target": "dji_20260923133954_0001_d",
+      "link_icon": "overview",
+      "images": []
     }
   ],
   "hotspots_2": [],
@@ -30,6 +32,6 @@
   "basemap_url": "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
   "mobile_1": 5000,
   "mobile_2": 0,
-  "heading_offset": null,
+  "heading_offset": 244.2864376679995,
   "capture_type": "aerial"
 }

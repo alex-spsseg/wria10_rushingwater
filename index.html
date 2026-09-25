@@ -128,6 +128,30 @@
     still distinguishes the two panels in Compare/Curtain tour stops. */
     body.is-tour #label-left { display: none; }
 
+    #flat-stop-viewer {
+      display: none; position: absolute; inset: 0; z-index: 600;
+      background: #0e1b33; flex-direction: column;
+    }
+    #flat-stop-viewer.visible { display: flex; }
+    #flat-stop-caption {
+      flex: none; padding: 14px 20px; font-size: 15px; font-weight: 600; color: #ffffff;
+      background: rgba(14, 27, 51, 0.9); border-bottom: 1px solid #1b3f95;
+    }
+    #flat-stop-body { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; }
+    #flat-stop-image { display: none; max-width: 100%; max-height: 100%; object-fit: contain; }
+    #flat-stop-pdf-wrap { display: none; width: 100%; height: 100%; flex-direction: column; }
+    #flat-stop-pdf { flex: 1; border: none; background: #ffffff; }
+    /* A PDF iframe just renders blank (no error, nothing to catch) on
+    a browser without a built-in PDF viewer, mobile Safari being the
+    common case -- so this link is always shown alongside it, not
+    just as a fallback, rather than leaving a dead-looking blank pane
+    as the only option there. */
+    #flat-stop-pdf-link {
+      flex: none; text-align: center; padding: 10px; background: rgba(14, 27, 51, 0.9);
+      color: #7fd4ea; font-size: 13px; text-decoration: none; border-top: 1px solid #1b3f95;
+    }
+    #flat-stop-pdf-link:hover { text-decoration: underline; }
+
     #status-banner {
       position: absolute; top: 0; left: 0; width: 100%; z-index: 2000;
       background: rgba(180, 40, 40, 0.92); color: #ffffff; text-align: center;
@@ -312,6 +336,7 @@
     arrow above, chosen explicitly rather than inferred, so it never
     changes on its own just because a target site gets reprocessed. */
     .hotspot-pin.hotspot-cat-link.hotspot-link-aerial::after { content: '\2708'; font-size: 13px; }
+    .hotspot-pin.hotspot-cat-link.hotspot-link-overview::after { content: '\2302'; font-size: 15px; }
     .hotspot-pin.hotspot-cat-photo::after {
       content: '';
       width: 100%; height: 100%;
@@ -540,7 +565,7 @@
 </head>
 <body>
 
-  <div id="build-timestamp">Built 2026-09-23 20:15:33</div>
+  <div id="build-timestamp">Built 2026-09-25 11:04:11</div>
 
   <div id="status-banner"></div>
 
@@ -558,6 +583,17 @@
       </div>
     </div>
     <div class="pano-label" id="label-right">Comparison View</div>
+
+    <div id="flat-stop-viewer">
+      <div id="flat-stop-caption"></div>
+      <div id="flat-stop-body">
+        <img id="flat-stop-image" alt="">
+        <div id="flat-stop-pdf-wrap">
+          <iframe id="flat-stop-pdf" title="Plan"></iframe>
+          <a id="flat-stop-pdf-link" target="_blank" rel="noopener">Open in a new tab &#8599;</a>
+        </div>
+      </div>
+    </div>
 
     <div id="curtain-slider"><div id="curtain-slider-handle">↔</div></div>
 
@@ -834,7 +870,9 @@
     // inferred from the target site -- so applying it is just a class
     // toggle, no fetch needed.
     function applyLinkHotspotIcon(el, spot) {
-      el.classList.toggle('hotspot-link-aerial', spot.category === 'link' && spot.link_icon === 'aerial');
+      var isLink = spot.category === 'link';
+      el.classList.toggle('hotspot-link-aerial', isLink && spot.link_icon === 'aerial');
+      el.classList.toggle('hotspot-link-overview', isLink && spot.link_icon === 'overview');
     }
 
     var container = document.getElementById('container');
@@ -2550,6 +2588,7 @@
         '<select class="hf-link-icon">' +
         '<option value="ground">Ground-level (arrow)</option>' +
         '<option value="aerial">Aerial / drone (plane)</option>' +
+        '<option value="overview">Overview (birds-eye)</option>' +
         '</select>' +
         '<label class="hf-return-link-label" style="display:none;">' +
         '<input type="checkbox" class="hf-return-link" checked> Also add a return link back here</label>' +
@@ -2674,6 +2713,7 @@
         '<select class="hf-link-icon">' +
         '<option value="ground">Ground-level (arrow)</option>' +
         '<option value="aerial">Aerial / drone (plane)</option>' +
+        '<option value="overview">Overview (birds-eye)</option>' +
         '</select>' +
         '<button type="button" class="hf-calibrate-heading" style="display:none; margin-top:8px;">' +
         'Calibrate Heading From This Position</button>' +
@@ -2942,6 +2982,64 @@
                                       // the browser tab title showing "Tour \u2014 Stop"
       var activeLink = null;
 
+      // -- flat (non-pano) tour stops -----------------------------------
+      // A stop published via "Flat image or PDF" (see write_flat_config
+      // in the publisher) has mode: "flat" in its config.json instead of
+      // any of the usual pano fields. Both call sites in loadStop below
+      // check that before touching Marzipano at all -- these two
+      // functions just show/hide the overlay and leave the pano
+      // viewer's own state alone underneath it. Nested here (not at
+      // the top level) so they can close over sceneCache and
+      // tourNameForTitle, both local to this tour instance.
+      function hideFlatStop() {
+        document.getElementById('flat-stop-viewer').classList.remove('visible');
+        document.getElementById('flat-stop-image').style.display = 'none';
+        document.getElementById('flat-stop-image').src = '';
+        document.getElementById('flat-stop-pdf-wrap').style.display = 'none';
+        document.getElementById('flat-stop-pdf').src = '';
+        document.getElementById('pano-left').style.visibility = '';
+        document.getElementById('pano-right-wrapper').style.visibility = '';
+        document.getElementById('autorotate-btn').style.display = '';
+        document.getElementById('reset-btn').style.display = '';
+        if (isLocalPreview) document.getElementById('edit-tools-panel').style.display = 'flex';
+      }
+      function showFlatStop(sid, config, fallbackLabel) {
+        var label = config.label || fallbackLabel;
+        document.getElementById('flat-stop-caption').textContent = label;
+        document.getElementById('label-left').innerText = label;
+        document.title = tourNameForTitle + ' \u2014 ' + label;
+
+        var fileUrl = 'tiles/' + sid + '/' + (config.file || '');
+        var imgEl = document.getElementById('flat-stop-image');
+        var pdfWrap = document.getElementById('flat-stop-pdf-wrap');
+        if (/\.pdf$/i.test(config.file || '')) {
+          document.getElementById('flat-stop-pdf').src = fileUrl;
+          document.getElementById('flat-stop-pdf-link').href = fileUrl;
+          pdfWrap.style.display = 'flex';
+          imgEl.style.display = 'none';
+          imgEl.src = '';
+        } else {
+          imgEl.src = fileUrl;
+          imgEl.style.display = 'block';
+          pdfWrap.style.display = 'none';
+          document.getElementById('flat-stop-pdf').src = '';
+        }
+        document.getElementById('flat-stop-viewer').classList.add('visible');
+
+        // Pano panels stay underneath (visibility, not display, so
+        // Marzipano's own size math never sees a zero-size container),
+        // fully covered by the flat overlay above them. Editing tools
+        // and the pano-only controls don't apply to a flat file, so
+        // they're hidden rather than left sitting there doing nothing.
+        document.getElementById('pano-left').style.visibility = 'hidden';
+        document.getElementById('pano-right-wrapper').style.visibility = 'hidden';
+        document.getElementById('autorotate-btn').style.display = 'none';
+        document.getElementById('reset-btn').style.display = 'none';
+        document.getElementById('edit-tools-panel').style.display = 'none';
+
+        sceneCache[sid] = { flat: true, config: config, label: label };
+      }
+
       function loadStop(rawId) {
         var sid = rawId.trim().toLowerCase().replace(/[\s-]+/g, '_');
         var linkEl = siteLinkElements[sid];
@@ -2957,6 +3055,12 @@
         var fallbackLabel = linkEl ? linkEl.textContent : sid;
         activeTourSiteId = sid;
         updateActiveMapMarker();
+
+        if (sceneCache[sid] && sceneCache[sid].flat) {
+          showFlatStop(sid, sceneCache[sid].config, fallbackLabel);
+          return;
+        }
+        hideFlatStop();
 
         if (sceneCache[sid]) {
           var cached = sceneCache[sid];
@@ -2983,6 +3087,10 @@
             }).then(cfg => { configCache[sid] = cfg; return cfg; });
 
         configPromise.then(config => {
+          if (config.mode === 'flat') {
+            showFlatStop(sid, config, fallbackLabel);
+            return;
+          }
           var isTiled = config.format === 'tiled';
           defaultViewL = { yaw: config.yaw_1 || 0, pitch: config.pitch_1 || 0, fov: Math.PI / 4 };
           // Only ever a fallback for a stop that's still at its
