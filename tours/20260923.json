@@ -84,6 +84,12 @@
       "display_name": "Stop 15",
       "lat": 46.900674101450214,
       "lng": -122.01628345812892
+    },
+    {
+      "site_id": "appendixa_rushingwater_permitplanset_2026.05.04",
+      "display_name": "Plan Sets (2025)",
+      "lat": null,
+      "lng": null
     }
   ],
   "basemap_type": "xyz_tile",
