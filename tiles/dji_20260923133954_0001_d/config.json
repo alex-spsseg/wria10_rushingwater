@@ -1,8 +1,8 @@
 {
   "mode": "single",
   "format": "raw",
-  "yaw_1": 1.2190724174482774,
-  "pitch_1": 1.5707963267948966,
+  "yaw_1": 0.3469257242407018,
+  "pitch_1": -0.06360946714940852,
   "yaw_2": 0.0,
   "pitch_2": 0.0,
   "lat": 46.901148972222224,
@@ -169,5 +169,6 @@
   "mobile_1": 5000,
   "mobile_2": 0,
   "heading_offset": 107.12484177440729,
-  "capture_type": "aerial"
+  "capture_type": "aerial",
+  "platform": "aerial"
 }

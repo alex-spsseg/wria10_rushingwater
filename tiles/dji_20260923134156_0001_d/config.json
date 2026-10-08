@@ -33,5 +33,6 @@
   "mobile_1": 5000,
   "mobile_2": 0,
   "heading_offset": 63.6470472812353,
-  "capture_type": "aerial"
+  "capture_type": "aerial",
+  "platform": "aerial"
 }
