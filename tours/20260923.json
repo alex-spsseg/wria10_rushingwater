@@ -94,7 +94,8 @@
       "site_id": "appendixa_rushingwater_permitplanset_2026.05.04",
       "display_name": "Plan Sets (2025)",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "kind": "pdf"
     }
   ],
   "basemap_type": "xyz_tile",
