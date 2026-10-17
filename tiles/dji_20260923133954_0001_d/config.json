@@ -170,5 +170,8 @@
   "mobile_2": 0,
   "heading_offset": 107.12484177440729,
   "capture_type": "aerial",
-  "platform": "aerial"
+  "platform": "aerial",
+  "alt_checked": true,
+  "alt": 653.09,
+  "rel_alt": 134.53
 }
