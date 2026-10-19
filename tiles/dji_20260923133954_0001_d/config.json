@@ -173,5 +173,6 @@
   "platform": "aerial",
   "alt_checked": true,
   "alt": 653.09,
-  "rel_alt": 134.53
+  "rel_alt": 134.53,
+  "overview": true
 }
