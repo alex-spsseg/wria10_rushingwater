@@ -175,5 +175,6 @@
   ],
   "forward_label": "Forward",
   "backward_label": "Back",
+  "map_start_zoom": 17,
   "field_visit_date": "2026-09-23"
 }
