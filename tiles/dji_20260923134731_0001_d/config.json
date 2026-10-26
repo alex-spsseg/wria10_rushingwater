@@ -92,14 +92,14 @@
     {
       "yaw": -2.468683711523651,
       "pitch": 0.5888112631891307,
-      "title": "Summer 2025",
+      "title": "US View (Summer 2025)",
       "text": "Aerial View of Confluence from August 2025 Site Visit",
       "link": "",
       "category": "photo",
       "pin_style": "label_hover",
       "images": [
-        "tiles/dji_20260923134731_0001_d/hotspot_images/1793051747251.jpg",
-        "tiles/dji_20260923134731_0001_d/hotspot_images/1793051747365.jpg"
+        "tiles/dji_20260923134731_0001_d/hotspot_images/1793052558577.jpg",
+        "tiles/dji_20260923134731_0001_d/hotspot_images/1793052558795.jpg"
       ]
     },
     {
@@ -111,7 +111,7 @@
       "category": "photo",
       "pin_style": "label_hover",
       "images": [
-        "tiles/dji_20260923134731_0001_d/hotspot_images/1793051918689.jpg"
+        "tiles/dji_20260923134731_0001_d/hotspot_images/1793052579831.jpg"
       ]
     }
   ],
