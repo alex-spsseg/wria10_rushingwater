@@ -22,6 +22,83 @@
       "target": "dji_20260923133954_0001_d",
       "link_icon": "overview",
       "images": []
+    },
+    {
+      "yaw": 4.534447080734044,
+      "pitch": -0.014861075870114947,
+      "title": "Stop 13 \u00b7 42 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "img_20260923_140941_00_002",
+      "link_icon": "ground"
+    },
+    {
+      "yaw": -0.9255880521926443,
+      "pitch": 0.04236923626347888,
+      "title": "Stop 8 \u00b7 48 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "img_20260923_135639_00_995",
+      "link_icon": "ground"
+    },
+    {
+      "yaw": 2.6047412664797664,
+      "pitch": -0.449771232090426,
+      "title": "Stop 5 \u00b7 53 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "dji_20260923134731_0001_d",
+      "link_icon": "aerial"
+    },
+    {
+      "yaw": 5.676087578109289,
+      "pitch": -0.40837364980756813,
+      "title": "Stop 4 \u00b7 60 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "dji_20260923134539_0001_d",
+      "link_icon": "aerial"
+    },
+    {
+      "yaw": 2.5622800918165014,
+      "pitch": 0.029163903873516972,
+      "title": "Stop 6 \u00b7 83 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "img_20260923_135418_00_993",
+      "link_icon": "ground"
+    },
+    {
+      "yaw": -0.7997211831783506,
+      "pitch": -0.019653048541881546,
+      "title": "Stop 12 \u00b7 79 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "img_20260923_140600_00_999",
+      "link_icon": "ground"
+    },
+    {
+      "yaw": 2.916217479826945,
+      "pitch": 0.03729232915605389,
+      "title": "Stop 14 \u00b7 129 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "img_20260923_141250_00_003",
+      "link_icon": "ground"
     }
   ],
   "hotspots_2": [],

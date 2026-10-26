@@ -19,7 +19,31 @@
       "link": "",
       "category": "link",
       "pin_style": "label_hover",
-      "target": "dji_20260923133954_0001_d"
+      "target": "dji_20260923133954_0001_d",
+      "link_icon": "overview",
+      "images": []
+    },
+    {
+      "yaw": -2.9733228274767782,
+      "pitch": 0.013386793905461047,
+      "title": "Stop 10 \u00b7 71 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "img_20260923_140025_00_997",
+      "link_icon": "ground"
+    },
+    {
+      "yaw": 2.6943806478803953,
+      "pitch": -0.26717935192309616,
+      "title": "Stop 2 \u00b7 74 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "dji_20260923134156_0001_d",
+      "link_icon": "aerial"
     }
   ],
   "hotspots_2": [],

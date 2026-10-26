@@ -22,6 +22,83 @@
       "target": "dji_20260923133954_0001_d",
       "link_icon": "overview",
       "images": []
+    },
+    {
+      "yaw": -2.056784594043627,
+      "pitch": 0.8603932615551937,
+      "title": "Stop 10 \u00b7 23 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "img_20260923_140025_00_997",
+      "link_icon": "ground"
+    },
+    {
+      "yaw": -0.6924001983381505,
+      "pitch": 0.2938350517426134,
+      "title": "Stop 11 \u00b7 74 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "img_20260923_140140_00_998",
+      "link_icon": "ground"
+    },
+    {
+      "yaw": -2.995946183941472,
+      "pitch": 0.30367427331314545,
+      "title": "Stop 9 \u00b7 90 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "img_20260923_135856_00_996",
+      "link_icon": "ground"
+    },
+    {
+      "yaw": 2.899164713261907,
+      "pitch": -0.0011333676334583478,
+      "title": "Stop 3 \u00b7 97 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "dji_20260923134344_0001_d",
+      "link_icon": "aerial"
+    },
+    {
+      "yaw": -3.06088638789306,
+      "pitch": 0.16317214536243085,
+      "title": "Stop 12 \u00b7 168 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "img_20260923_140600_00_999",
+      "link_icon": "ground"
+    },
+    {
+      "yaw": -3.0455961615750873,
+      "pitch": 0.12239342303027989,
+      "title": "Stop 8 \u00b7 200 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "img_20260923_135639_00_995",
+      "link_icon": "ground"
+    },
+    {
+      "yaw": 3.0915291853601037,
+      "pitch": -0.002246256657978178,
+      "title": "Stop 4 \u00b7 187 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "dji_20260923134539_0001_d",
+      "link_icon": "aerial"
     }
   ],
   "hotspots_2": [],

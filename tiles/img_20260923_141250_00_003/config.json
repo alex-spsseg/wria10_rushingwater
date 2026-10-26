@@ -22,6 +22,39 @@
       "target": "dji_20260923133954_0001_d",
       "link_icon": "overview",
       "images": []
+    },
+    {
+      "yaw": -1.2843362798623197,
+      "pitch": 0.03264042798817357,
+      "title": "Stop 6 \u00b7 51 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "img_20260923_135418_00_993",
+      "link_icon": "ground"
+    },
+    {
+      "yaw": 4.063255981438442,
+      "pitch": -0.36130038946230913,
+      "title": "Stop 5 \u00b7 80 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "dji_20260923134731_0001_d",
+      "link_icon": "aerial"
+    },
+    {
+      "yaw": 3.5518841958873826,
+      "pitch": -0.03950167505815078,
+      "title": "Stop 13 \u00b7 137 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "img_20260923_140941_00_002",
+      "link_icon": "ground"
     }
   ],
   "hotspots_2": [],
@@ -32,8 +65,9 @@
   "basemap_url": "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
   "mobile_1": 5000,
   "mobile_2": 0,
-  "heading_offset": 33.87818675493105,
+  "heading_offset": 222.2534862552733,
   "capture_type": "aerial",
   "alt_checked": true,
-  "alt": 518.27
+  "alt": 518.27,
+  "heading_confirmed": true
 }

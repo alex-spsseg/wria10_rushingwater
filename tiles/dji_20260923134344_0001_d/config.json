@@ -22,6 +22,84 @@
       "target": "dji_20260923133954_0001_d",
       "link_icon": "overview",
       "images": []
+    },
+    {
+      "yaw": 1.8248532830749316,
+      "pitch": 0.849449080755889,
+      "title": "Stop 9 \u00b7 26 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "img_20260923_135856_00_996",
+      "link_icon": "ground"
+    },
+    {
+      "yaw": 0.46000687148194075,
+      "pitch": 0.34380968956186564,
+      "title": "Stop 12 \u00b7 76 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "img_20260923_140600_00_999",
+      "link_icon": "ground"
+    },
+    {
+      "yaw": 2.8900607702377954,
+      "pitch": 0.2675136603763928,
+      "title": "Stop 10 \u00b7 93 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "img_20260923_140025_00_997",
+      "link_icon": "ground"
+    },
+    {
+      "yaw": 0.28813720223946504,
+      "pitch": 0.002863381966680123,
+      "title": "Stop 4 \u00b7 93 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "dji_20260923134539_0001_d",
+      "link_icon": "aerial"
+    },
+    {
+      "yaw": -3.139991563973343,
+      "pitch": 0.013785696281164661,
+      "title": "Stop 2 \u00b7 97 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "dji_20260923134156_0001_d",
+      "link_icon": "aerial"
+    },
+    {
+      "yaw": 0.44935927764511163,
+      "pitch": 0.26274172116378836,
+      "title": "Stop 8 \u00b7 108 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "img_20260923_135639_00_995",
+      "link_icon": "ground"
+    },
+    {
+      "yaw": 3.1294629195424735,
+      "pitch": 0.2867467079217363,
+      "title": "US View (Summer 2025)",
+      "text": "Aerial View from August 2025 Site Visit",
+      "link": "",
+      "category": "photo",
+      "pin_style": "label_hover",
+      "images": [
+        "tiles/dji_20260923134344_0001_d/hotspot_images/1793051982008.jpg"
+      ]
     }
   ],
   "hotspots_2": [],

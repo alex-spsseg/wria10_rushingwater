@@ -975,7 +975,7 @@
 </head>
 <body>
 
-  <div id="build-timestamp">Built 2026-10-26 14:19:35</div>
+  <div id="build-timestamp">Built 2026-10-26 15:00:00</div>
 
   <div id="status-banner"></div>
 
@@ -1115,6 +1115,11 @@
           <input type="number" id="link-all-maxdist" min="1" step="10" placeholder="any" style="width:62px; margin:0 4px; background:#0A1428; color:#fff; border:1px solid #5b3a8c; border-radius:4px; padding:2px 4px;"> m
         </div>
         <label style="display:block; margin-top:6px;"><input type="checkbox" id="link-all-tilt" checked> Tilt pins using altitude</label>
+        <label style="display:block; margin-top:6px;"><input type="checkbox" id="link-all-showdist" checked> Show the distance in the link label</label>
+        <div style="margin-top:6px;">Skip a stop within
+          <input type="number" id="link-all-prune" min="1" step="5" value="15" placeholder="off" style="width:48px; margin:0 4px; background:#0A1428; color:#fff; border:1px solid #5b3a8c; border-radius:4px; padding:2px 4px;"> degrees of a closer link
+          <div style="font-size:11px; color:#b9a6d8; margin-top:2px;">Blank keeps every link.</div>
+        </div>
       </div>
       <button id="link-all-undo-btn" class="edit-tool-btn" type="button" style="display:none;">Undo Link to All</button>
       <button id="edit-hotspots-btn" class="edit-tool-btn" type="button" style="display:none;">Move/Delete Points</button>
@@ -5504,12 +5509,19 @@
           if (!want.overview && !want.aerial && !want.ground && !want.float) { flashMsg('Tick at least one type'); return; }
           var maxDist = parseFloat(document.getElementById('link-all-maxdist').value);
           if (!(maxDist > 0)) maxDist = Infinity;
-          var added = 0, noGps = 0, typeSkipped = 0, tooFar = 0;
+          var added = 0, noGps = 0, typeSkipped = 0, tooFar = 0, masked = 0;
           var batch = [];
           var diag = [];
           var tilt = document.getElementById('link-all-tilt').checked;
+          var showDist = document.getElementById('link-all-showdist').checked;
+          var pruneDeg = parseFloat(document.getElementById('link-all-prune').value);
+          if (!(pruneDeg > 0)) pruneDeg = 0;
+          // The name a link shows: the stop's name in the tour with a trailing (date or note) left off, like the
+          // batch tool in the publisher does.
+          var linkName = (st, no) => String(st.display_name || '').replace(/\s*\([^()]*\)\s*$/, '').trim() || ('Stop ' + no);
           var meOpt = tourSiteOptions.find(x => normId(x.site_id) === sid) || {};
-          tourSiteOptions.forEach(st => {
+          var cands = [];
+          tourSiteOptions.forEach((st, stIdx) => {
             var tid = normId(st.site_id);
             if (tid === sid || have[tid]) return;
             if (st.lat == null || st.lng == null) { noGps++; return; }
@@ -5520,8 +5532,22 @@
             var dist = Math.sqrt(dLat * dLat + dLng * dLng);
             if (dist < 0.5) return;
             if (dist > maxDist) { tooFar++; return; }
-            var b = computeBearingJs(me[0], me[1], st.lat, st.lng);
-            var yaw = ((((b - currentHeadingOffset) % 360) + 360) % 360) * Math.PI / 180;
+            cands.push({ st: st, no: stIdx + 1, kind: kind, dist: dist, bearing: computeBearingJs(me[0], me[1], st.lat, st.lng) });
+          });
+          // Mask: nearest first, and a stop whose bearing is within pruneDeg of a closer one already kept is
+          // skipped, so a cluster of stops in one direction gets one link instead of a fan of overlapping pins.
+          cands.sort((x, y) => x.dist - y.dist);
+          if (pruneDeg) {
+            var keptBearings = [];
+            cands = cands.filter(c => {
+              if (keptBearings.some(kb => Math.abs(((c.bearing - kb + 540) % 360) - 180) < pruneDeg)) { masked++; return false; }
+              keptBearings.push(c.bearing);
+              return true;
+            });
+          }
+          cands.forEach(c => {
+            var st = c.st, kind = c.kind, dist = c.dist;
+            var yaw = ((((c.bearing - currentHeadingOffset) % 360) + 360) % 360) * Math.PI / 180;
             // Pitch from altitude: the GPS height difference over the horizontal distance. Both stops need
             // an altitude (all treated as ellipsoid heights), otherwise the pin stays level.
             // Marzipano pitch is positive DOWNWARD, so a target above this stop gets a negative pitch.
@@ -5531,11 +5557,12 @@
               upDeg = Math.max(-80, Math.min(80, Math.atan2(dz, dist) * 180 / Math.PI));
               pitch = -upDeg * Math.PI / 180;
             }
-            diag.push({ target: st.display_name || st.site_id, kind: kind, alt: st.alt, rel_alt: st.rel_alt,
+            var label = linkName(st, c.no) + (showDist ? ' \u00B7 ' + Math.round(dist) + ' m' : '');
+            diag.push({ target: label, kind: kind, alt: st.alt, rel_alt: st.rel_alt,
                         dist_m: Math.round(dist), dz_m: dz == null ? null : Math.round(dz * 10) / 10,
                         degrees_above_horizon: Math.round(upDeg) });
             var spot = {
-              yaw: yaw, pitch: pitch, title: st.display_name || st.site_id, text: '', link: '',
+              yaw: yaw, pitch: pitch, title: label, text: '', link: '',
               category: 'link', pin_style: 'label_hover', target: st.site_id, link_icon: kind,
             };
             pendingSlotHotspots[sid].push(spot);
@@ -5555,7 +5582,7 @@
             linkAllUndoStack.push({ sid: sid, scene: activeTourScene, items: batch, name: (me2 && me2.display_name) || sid });
             updateLinkAllUndoVisibility();
           }
-          flashMsg(added ? ('Added ' + added + ' link' + (added > 1 ? 's' : '') + ', now Save Hotspots')
+          flashMsg(added ? ('Added ' + added + ' link' + (added > 1 ? 's' : '') + (masked ? ' (' + masked + ' masked)' : '') + ', now Save Hotspots')
                          : (tooFar ? 'Nothing within ' + maxDist + ' m' : typeSkipped ? 'Nothing to add for the ticked types' : (noGps ? 'Nothing added (others have no GPS)' : 'Already linked to every stop')));
         });
       }

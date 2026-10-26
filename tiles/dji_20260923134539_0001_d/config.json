@@ -22,6 +22,129 @@
       "target": "dji_20260923133954_0001_d",
       "link_icon": "overview",
       "images": []
+    },
+    {
+      "yaw": 0.5616845090690578,
+      "pitch": 1.0048097636129876,
+      "title": "Stop 8 \u00b7 16 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "img_20260923_135639_00_995",
+      "link_icon": "ground"
+    },
+    {
+      "yaw": 2.68572803657098,
+      "pitch": 1.0488521723620128,
+      "title": "Stop 12 \u00b7 19 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "img_20260923_140600_00_999",
+      "link_icon": "ground"
+    },
+    {
+      "yaw": -0.17822999243221638,
+      "pitch": 0.42939312384063477,
+      "title": "Stop 7 \u00b7 60 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "img_20260923_135549_00_994",
+      "link_icon": "ground"
+    },
+    {
+      "yaw": -3.0439942537116114,
+      "pitch": 0.027140512340150025,
+      "title": "Stop 3 \u00b7 93 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "dji_20260923134344_0001_d",
+      "link_icon": "aerial"
+    },
+    {
+      "yaw": 0.4940761327456844,
+      "pitch": 0.3788383237450823,
+      "title": "Stop 13 \u00b7 57 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "img_20260923_140941_00_002",
+      "link_icon": "ground"
+    },
+    {
+      "yaw": 2.877127401062383,
+      "pitch": 0.27471743093089884,
+      "title": "Stop 9 \u00b7 98 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "img_20260923_135856_00_996",
+      "link_icon": "ground"
+    },
+    {
+      "yaw": -0.11815092748329903,
+      "pitch": 0.22637483115926393,
+      "title": "Stop 6 \u00b7 143 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "img_20260923_135418_00_993",
+      "link_icon": "ground"
+    },
+    {
+      "yaw": -0.21556146122287956,
+      "pitch": 0.00881037322206879,
+      "title": "Stop 5 \u00b7 113 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "dji_20260923134731_0001_d",
+      "link_icon": "aerial"
+    },
+    {
+      "yaw": 2.9569874725963654,
+      "pitch": 0.007157573770054881,
+      "title": "Stop 2 \u00b7 187 m",
+      "text": "",
+      "link": "",
+      "category": "link",
+      "pin_style": "label_hover",
+      "target": "dji_20260923134156_0001_d",
+      "link_icon": "aerial"
+    },
+    {
+      "yaw": -2.7100392264029676,
+      "pitch": 0.9778140086075808,
+      "title": "Confluence (Summer 2025)",
+      "text": "Aerial View of Confluence from August 2025 Site Visit",
+      "link": "",
+      "category": "photo",
+      "pin_style": "label_hover",
+      "images": [
+        "tiles/dji_20260923134539_0001_d/hotspot_images/1793051647026.jpg"
+      ]
+    },
+    {
+      "yaw": -0.24251484180616245,
+      "pitch": 0.6008694026557304,
+      "title": "DS View (Summer 2025)",
+      "text": "Aerial View from August 2025 Site Visit",
+      "link": "",
+      "category": "photo",
+      "pin_style": "label_hover",
+      "images": [
+        "tiles/dji_20260923134539_0001_d/hotspot_images/1793051835098.jpg"
+      ]
     }
   ],
   "hotspots_2": [],
